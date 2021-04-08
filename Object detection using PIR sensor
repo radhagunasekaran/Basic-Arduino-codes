@@ -1,0 +1,44 @@
+//Whenever an object is detected by the PIR sensor, the buzzer should beep and the led connected to pin 10 should keep blinking until the object is detected .
+//When no object is detected, the led connected to pin 5 should keep glowing .
+
+#define ledpin 13
+#define trigpin 3
+#define echopin 2
+long duration;
+int distance;
+void setup() {
+  // put your setup code here, to run once:
+  pinMode( trigpin , OUTPUT );
+  pinMode( echopin , INPUT );
+  pinMode( ledpin , OUTPUT );
+  Serial.begin(9600);
+  Serial.print("Ultrasonic sensor with led");
+  Serial.println();
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(trigpin , LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigpin , HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigpin , LOW);
+  duration = pulseIn( echopin , HIGH );
+  distance = duration * 0.034 / 2;
+  Serial.print("Distance = ");
+  Serial.print(distance);
+  if ( distance > 15 )
+  {
+    digitalWrite( ledpin , HIGH );
+  }
+  else
+  {
+    digitalWrite( ledpin , LOW );
+  }
+  int ledvalue=digitalRead(ledpin);
+  Serial.print(" ");
+  Serial.print("ledpin = ");
+  Serial.print(ledvalue);
+  Serial.println();
+  delay(1000);
+}
