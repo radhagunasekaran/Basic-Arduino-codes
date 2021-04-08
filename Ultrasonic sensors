@@ -1,3 +1,6 @@
+//Using ultrasonic sensor calculate the distance of an object. 
+//If the distance of the object is greater than 15cms, indicate it by making an led glow else the led should not glow
+
 #define ledpin 13
 #define trigpin 3
 #define echopin 2
